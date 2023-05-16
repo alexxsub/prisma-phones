@@ -6,7 +6,7 @@
   "scripts": {
     "studio": "npx prisma studio",
     "migrate": "npx prisma migrate dev",
-    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only server.ts",
     "start": "node dist/server",
     "clean": "rm -rf dist",
     "build": "npm -s run clean && npm -s run generate && tsc",
@@ -33,6 +33,7 @@
   "dependencies": {
     "@apollo/server": "^4.7.0",
     "@prisma/client": "^4.13.0",
+    "dotenv": "^16.0.3",
     "nexus": "^1.3.0"
   },
   "prisma": {

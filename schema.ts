@@ -11,13 +11,13 @@ import { Context } from './context'
 const Query = objectType({
     name: 'Query',
     definition(t) {
-        t.nonNull.list.nonNull.field('getPhones', {
+        t.nonNull.list.nonNull.field('readPhones', {
             type: 'Phone',
             resolve: (_parent, _args, context: Context) => {
                 return context.prisma.phone.findMany()
             }
-        }),
-    },
+        })
+    }
 });
 
  
