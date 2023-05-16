@@ -6,6 +6,26 @@ import {
   inputObjectType,
 } from 'nexus'
 import { Context } from './context'
+//тип основной сущности
+const Phone = objectType({
+    name: 'Phone',
+    definition(t) {
+        t.nonNull.int('id')
+        t.nonNull.string('number')
+        t.string('name')
+    },
+});
+
+
+//Тип ввода
+const inputPhone = inputObjectType({
+    name: 'nputPhone',
+    definition(t) {
+        t.int('id')
+        t.string('number')
+        t.string('name')
+    },
+});
 
 
 const Query = objectType({
@@ -39,25 +59,7 @@ const Mutation = objectType({
     },
 });
 
-const Phone = objectType({
-    name: 'Phone',
-    definition(t) {
-        t.nonNull.int('id')
-        t.nonNull.string('number')
-        t.string('name')
-    },
-});
 
-
-
-const Input = inputObjectType({
-    name: 'Input',
-    definition(t) {
-        t.int('id')
-        t.string('number')
-        t.string('name')
-    },
-});
 
 
 export const schema = makeSchema({
@@ -65,7 +67,7 @@ export const schema = makeSchema({
         Query,
         Mutation,
         Phone,
-        Input,
+        inputPhone,
     ],
     outputs: {
         schema: __dirname + '/../schema.graphql',

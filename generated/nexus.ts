@@ -14,7 +14,7 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  Input: { // input type
+  nputPhone: { // input type
     id?: number | null; // Int
     name?: string | null; // String
     number?: string | null; // String

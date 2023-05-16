@@ -6,7 +6,7 @@ import { Context, createContext } from './context'
 const start = async () => {
   const server = new ApolloServer<Context>({ schema }),
         port = Number(process.env.PORT || 9002),
-        host = process.env.PORT || 'localhost',
+        host = process.env.HOST || 'localhost',
         { url } = await startStandaloneServer(server, {
     context: createContext,
     listen: {host,port }
@@ -17,3 +17,4 @@ const start = async () => {
 }
 
 start()
+//sudo netstat -ntlp
