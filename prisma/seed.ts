@@ -12,6 +12,12 @@ const vader = await prisma.phone.create({
           number: '2222',
           name: 'Дарт Вейдер',
         },
+})
+  const padme = await prisma.phone.create({
+        data: {
+          number: '3333',
+          name: 'Падме Амидала',
+        },
       })
 }
 main()

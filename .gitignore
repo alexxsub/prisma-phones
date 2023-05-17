@@ -1,3 +1,5 @@
 node_modules
-# Keep environment variables out of version control
+package-lock.json
+yarn.lock
+# держим настройки окружения за пределами контроля версий
 .env

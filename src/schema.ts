@@ -1,16 +1,22 @@
 import {
+    intArg,
   stringArg,
   makeSchema,
   nonNull,
   objectType,
   inputObjectType,
 } from 'nexus'
-import { Context } from './context'
+//интерфейс контекста
+import { IContext } from './context'
+//описание резолвов
+import {readPhonesResolver,deletePhoneResolver,createPhoneResolver,updatePhoneResolver} from "./resolvers";
+
+
 //тип основной сущности
 const Phone = objectType({
     name: 'Phone',
     definition(t) {
-        t.nonNull.string('id')
+        t.nonNull.int('id')
         t.nonNull.string('number')
         t.string('name')
     },
@@ -21,43 +27,45 @@ const Phone = objectType({
 const inputPhone = inputObjectType({
     name: 'inputPhone',
     definition(t) {
-        t.string('id')
+        t.int('id')
         t.string('number')
         t.string('name')
     },
 });
 
-
+//запрос на выборку
 const Query = objectType({
     name: 'Query',
     definition(t) {
-        t.nonNull.list.nonNull.field('readPhones', {
+        t.list.field('readPhones', {
             type: 'Phone',
-            resolve (_, __, context: Context) {
-                return context.prisma.phone.findMany()
-            }
+            resolve:readPhonesResolver
         })
     }
 });
 
- 
+//запрос на удаление
 const Mutation = objectType({
     name: 'Mutation',
     definition(t) {
-  
         t.field('deletePhone', {
             type: 'Phone',
             args: {
-                id: nonNull(stringArg()),
+                id: nonNull(stringArg())
             },
-            resolve(_, args, context: Context) {
-                return context.prisma.phone.delete({
-                    where: { id: Number(args.id) },
-                })
+            resolve:deletePhoneResolver            
+        }),
+        
+        t.field('createPhone', {
+            type: 'Phone',
+            args: {
+                inputPhone: nonNull(stringArg())
             },
-        })
-    },
+            resolve:createPhoneResolver            
+        })    
+    }
 });
+
 
 
 
@@ -70,12 +78,12 @@ export const schema = makeSchema({
         inputPhone,
     ],
     outputs: {
-        schema: __dirname + '/../schema.graphql',
+        schema: __dirname + '/generated/schema.graphql',
         typegen: __dirname + '/generated/nexus.ts',
     },
     contextType: {
         module: require.resolve('./context'),
-        export: 'Context',
+        export: 'IContext',
     },
     sourceTypes: {
         modules: [

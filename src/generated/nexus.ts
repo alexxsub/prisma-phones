@@ -4,7 +4,7 @@
  */
 
 
-import type { Context } from "./../context"
+import type { IContext } from "./../context"
 
 
 
@@ -15,7 +15,7 @@ declare global {
 
 export interface NexusGenInputs {
   inputPhone: { // input type
-    id?: string | null; // String
+    id?: number | null; // Int
     name?: string | null; // String
     number?: string | null; // String
   }
@@ -35,7 +35,7 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Phone: { // root type
-    id: string; // String!
+    id: number; // Int!
     name?: string | null; // String
     number: string; // String!
   }
@@ -54,24 +54,26 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    createPhone: NexusGenRootTypes['Phone'] | null; // Phone
     deletePhone: NexusGenRootTypes['Phone'] | null; // Phone
   }
   Phone: { // field return type
-    id: string; // String!
+    id: number; // Int!
     name: string | null; // String
     number: string; // String!
   }
   Query: { // field return type
-    readPhones: NexusGenRootTypes['Phone'][]; // [Phone!]!
+    readPhones: Array<NexusGenRootTypes['Phone'] | null> | null; // [Phone]
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
+    createPhone: 'Phone'
     deletePhone: 'Phone'
   }
   Phone: { // field return type name
-    id: 'String'
+    id: 'Int'
     name: 'String'
     number: 'String'
   }
@@ -82,6 +84,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createPhone: { // args
+      inputPhone: string; // String!
+    }
     deletePhone: { // args
       id: string; // String!
     }
@@ -119,7 +124,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context;
+  context: IContext;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

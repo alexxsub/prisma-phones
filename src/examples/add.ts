@@ -3,13 +3,13 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  const user = await prisma.phone.create({
+  const res = await prisma.phone.create({
     data: {
       number: "+79303002021",
       name: "John Doe",
     },
   });
-  console.log(user);
+  console.log(res);
 }
 
 main()

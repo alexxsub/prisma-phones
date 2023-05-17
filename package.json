@@ -7,7 +7,7 @@
     "studio": "npx prisma studio",
     "migrate": "npx prisma migrate dev",
     "seed": "ts-node prisma/seed.ts",
-    "dev": "ts-node-dev --no-notify --respawn --transpile-only server.ts",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server.ts",
     "start": "node dist/server",
     "clean": "rm -rf dist",
     "build": "npm -s run clean && npm -s run generate && tsc",
