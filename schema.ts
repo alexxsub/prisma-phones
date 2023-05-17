@@ -1,5 +1,5 @@
 import {
-  intArg,
+  stringArg,
   makeSchema,
   nonNull,
   objectType,
@@ -10,7 +10,7 @@ import { Context } from './context'
 const Phone = objectType({
     name: 'Phone',
     definition(t) {
-        t.nonNull.int('id')
+        t.nonNull.string('id')
         t.nonNull.string('number')
         t.string('name')
     },
@@ -19,9 +19,9 @@ const Phone = objectType({
 
 //Тип ввода
 const inputPhone = inputObjectType({
-    name: 'nputPhone',
+    name: 'inputPhone',
     definition(t) {
-        t.int('id')
+        t.string('id')
         t.string('number')
         t.string('name')
     },
@@ -33,7 +33,7 @@ const Query = objectType({
     definition(t) {
         t.nonNull.list.nonNull.field('readPhones', {
             type: 'Phone',
-            resolve: (_parent, _args, context: Context) => {
+            resolve (_, __, context: Context) {
                 return context.prisma.phone.findMany()
             }
         })
@@ -48,11 +48,11 @@ const Mutation = objectType({
         t.field('deletePhone', {
             type: 'Phone',
             args: {
-                id: nonNull(intArg()),
+                id: nonNull(stringArg()),
             },
-            resolve: (_, args, context: Context) => {
+            resolve(_, args, context: Context) {
                 return context.prisma.phone.delete({
-                    where: { id: args.id },
+                    where: { id: Number(args.id) },
                 })
             },
         })

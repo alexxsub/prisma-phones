@@ -14,8 +14,8 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  nputPhone: { // input type
-    id?: number | null; // Int
+  inputPhone: { // input type
+    id?: string | null; // String
     name?: string | null; // String
     number?: string | null; // String
   }
@@ -35,7 +35,7 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Phone: { // root type
-    id: number; // Int!
+    id: string; // String!
     name?: string | null; // String
     number: string; // String!
   }
@@ -57,7 +57,7 @@ export interface NexusGenFieldTypes {
     deletePhone: NexusGenRootTypes['Phone'] | null; // Phone
   }
   Phone: { // field return type
-    id: number; // Int!
+    id: string; // String!
     name: string | null; // String
     number: string; // String!
   }
@@ -71,7 +71,7 @@ export interface NexusGenFieldTypeNames {
     deletePhone: 'Phone'
   }
   Phone: { // field return type name
-    id: 'Int'
+    id: 'String'
     name: 'String'
     number: 'String'
   }
@@ -83,7 +83,7 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     deletePhone: { // args
-      id: number; // Int!
+      id: string; // String!
     }
   }
 }

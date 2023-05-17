@@ -1,9 +1,9 @@
 -- CreateTable
-CREATE TABLE "Phosne" (
+CREATE TABLE "Phone" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "number" TEXT NOT NULL,
     "name" TEXT
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Phosne_number_key" ON "Phosne"("number");
+CREATE UNIQUE INDEX "Phone_number_key" ON "Phone"("number");
