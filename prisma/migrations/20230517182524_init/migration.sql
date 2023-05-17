@@ -1,8 +1,8 @@
 -- CreateTable
 CREATE TABLE "Phone" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "number" TEXT NOT NULL,
-    "name" TEXT
+    "name" TEXT NOT NULL
 );
 
 -- CreateIndex

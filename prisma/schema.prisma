@@ -11,7 +11,8 @@ datasource db {
 }
 
 model Phone {
-  id     Int     @id @default(autoincrement())
+// id     Int     @id @default(autoincrement())
+  id String  @id @default(uuid())
   number String  @unique
-  name   String?
+  name   String
 }

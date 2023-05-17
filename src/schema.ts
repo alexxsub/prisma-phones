@@ -1,35 +1,39 @@
 import {
-    intArg,
-  stringArg,
-  makeSchema,
-  nonNull,
-  objectType,
-  inputObjectType,
+    stringArg,
+    makeSchema,
+    nonNull,
+    objectType,
+    inputObjectType,
 } from 'nexus'
-//интерфейс контекста
-import { IContext } from './context'
-//описание резолвов
-import {readPhonesResolver,deletePhoneResolver,createPhoneResolver,updatePhoneResolver} from "./resolvers";
+
+//импорт резолвов
+import {
+    createPhoneResolver,
+    readPhonesResolver,
+    updatePhoneResolver,
+    deletePhoneResolver
+} from "./resolvers";
 
 
 //тип основной сущности
 const Phone = objectType({
     name: 'Phone',
+    description:'Записи телефонного справочника',
     definition(t) {
-        t.nonNull.int('id')
+        t.nonNull.string('id')
         t.nonNull.string('number')
-        t.string('name')
+        t.nonNull.string('name')
     },
 });
-
 
 //Тип ввода
 const inputPhone = inputObjectType({
     name: 'inputPhone',
+    description:'Тип ввода',
     definition(t) {
-        t.int('id')
-        t.string('number')
-        t.string('name')
+        t.nonNull.field('id',{type:'String',description:'id записи'})
+        t.nonNull.string('number')
+        t.nonNull.string('name')
     },
 });
 
@@ -49,7 +53,7 @@ const Mutation = objectType({
     name: 'Mutation',
     definition(t) {
         t.field('deletePhone', {
-            type: 'Phone',
+            type: nonNull('Phone'),
             args: {
                 id: nonNull(stringArg())
             },
@@ -59,10 +63,17 @@ const Mutation = objectType({
         t.field('createPhone', {
             type: 'Phone',
             args: {
-                inputPhone: nonNull(stringArg())
+                input: nonNull(inputPhone)
             },
             resolve:createPhoneResolver            
-        })    
+        }),
+        t.field('updatePhone', {
+            type: 'Phone',
+            args: {
+                input: nonNull(inputPhone)
+            },
+            resolve:updatePhoneResolver            
+        })        
     }
 });
 

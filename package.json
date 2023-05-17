@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "studio": "npx prisma studio",
-    "migrate": "npx prisma migrate dev",
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev",
     "seed": "ts-node prisma/seed.ts",
     "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server.ts",
     "start": "node dist/server",

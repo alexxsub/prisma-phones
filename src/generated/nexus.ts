@@ -15,9 +15,9 @@ declare global {
 
 export interface NexusGenInputs {
   inputPhone: { // input type
-    id?: number | null; // Int
-    name?: string | null; // String
-    number?: string | null; // String
+    id: string; // String!
+    name: string; // String!
+    number: string; // String!
   }
 }
 
@@ -35,8 +35,8 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Phone: { // root type
-    id: number; // Int!
-    name?: string | null; // String
+    id: string; // String!
+    name: string; // String!
     number: string; // String!
   }
   Query: {};
@@ -55,11 +55,12 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createPhone: NexusGenRootTypes['Phone'] | null; // Phone
-    deletePhone: NexusGenRootTypes['Phone'] | null; // Phone
+    deletePhone: NexusGenRootTypes['Phone']; // Phone!
+    updatePhone: NexusGenRootTypes['Phone'] | null; // Phone
   }
   Phone: { // field return type
-    id: number; // Int!
-    name: string | null; // String
+    id: string; // String!
+    name: string; // String!
     number: string; // String!
   }
   Query: { // field return type
@@ -71,9 +72,10 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createPhone: 'Phone'
     deletePhone: 'Phone'
+    updatePhone: 'Phone'
   }
   Phone: { // field return type name
-    id: 'Int'
+    id: 'String'
     name: 'String'
     number: 'String'
   }
@@ -85,10 +87,13 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     createPhone: { // args
-      inputPhone: string; // String!
+      input: NexusGenInputs['inputPhone']; // inputPhone!
     }
     deletePhone: { // args
       id: string; // String!
+    }
+    updatePhone: { // args
+      input: NexusGenInputs['inputPhone']; // inputPhone!
     }
   }
 }
