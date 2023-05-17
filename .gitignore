@@ -1,5 +1,7 @@
 node_modules
 package-lock.json
 yarn.lock
+migrations
+generated
 # держим настройки окружения за пределами контроля версий
 .env
